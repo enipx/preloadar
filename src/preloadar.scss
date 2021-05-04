@@ -1,0 +1,586 @@
+// ------------- Variable
+:root {
+   --preloadar-main-color: #2b84e4;
+   --preloadar-main-alt-color: #e8e7e7;
+   --preloadar-bg-color: #ffffff;
+}
+
+$mainBgColor: var(--preloadar-bg-color);
+$mainColor: var(--preloadar-main-color);
+$bg: var(--preloadar-main-alt-color); // Length
+$animationDur: .8s;
+$animationLength: 32px;
+$animationHalfLength: 16px;
+$animationLengthDeg: 32deg;
+$animationBigLength: 50px;
+
+//Dark
+$dark: rgb(22, 22, 22);
+
+// ------------- Mixins
+@mixin borderRad {
+   border-radius: 50%;
+}
+
+@mixin PreloadarHideScroll {
+   overflow: hidden !important;
+}
+
+@mixin PreloadarOpacityReset {
+   opacity: 1;
+}
+
+@mixin PreloadarBodyStyle {
+   @include PreloadarHideScroll;
+}
+
+@mixin PreloadarDefaultSize {
+   width: 50px;
+}
+
+@mixin PreloadarTransition {
+   transition: .5s ease-out;
+}
+
+@mixin PreloadarPositionCenter {
+   position: absolute !important;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+@mixin PreloadarPositionFixed {
+   position: fixed;
+   top: 0;
+   left: 0;
+}
+
+@mixin PreloadarPage {
+   width: 100%;
+   height: 100%;
+   @include PreloadarPositionFixed;
+   @include PreloadarHideScroll;
+   z-index: 99999999;
+   background-color: $mainBgColor;
+   @include PreloadarOpacityReset;
+   @include PreloadarTransition;
+}
+
+@mixin PreloadarScaleAnimation {
+   animation: scaleFrames .4s linear alternate infinite;
+   @include PreloadarDefaultSize;
+
+   @keyframes scaleFrames {
+      from {
+         transform: scale(1)
+      }
+
+      to {
+         transform: scale(1.35)
+      }
+   }
+}
+
+@mixin PreloadarTopBar {
+   position: fixed;
+   width: 100%;
+   height: 100%;
+   @include PreloadarPositionFixed;
+   @include PreloadarHideScroll;
+   background-color: $mainBgColor;
+   overflow: hidden;
+   z-index: 99999999;
+   @include PreloadarOpacityReset;
+   @include PreloadarTransition;
+}
+
+@mixin preloadarTopBarStyle {
+   width: 60%;
+   height: 4px;
+   position: absolute;
+   top: 0;
+   background-color: $mainColor;
+   animation: moveFrames 1s linear infinite;
+
+   @keyframes moveFrames {
+      from {
+         transform: translateX(-60%)
+      }
+
+      to {
+         transform: translateX(160%)
+      }
+   }
+}
+
+// ------------- Styling
+body {
+   margin: 0;
+   padding: 0;
+}
+
+.preloadarHideScrollbar {
+   @include PreloadarHideScroll;
+}
+
+.preloadarHide {
+   pointer-events: none;
+   opacity: 0 !important;
+   @include PreloadarHideScroll;
+}
+
+#preloadarContainer {
+   display: none !important;
+}
+
+.preloadarBodyStyle {
+   @include PreloadarBodyStyle;
+}
+
+.preloadarPage {
+   @include PreloadarPage;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.preloadarTopBar {
+   @include PreloadarTopBar;
+}
+
+.preloadarScaleStyle {
+   @include PreloadarPositionCenter;
+   @include PreloadarScaleAnimation;
+}
+
+.preloadarTopBarStyle {
+   @include preloadarTopBarStyle;
+}
+
+.loadar {
+   //@include PreloadarPositionCenter();
+   position: relative;
+
+   // =============== Spin
+   &.spin {
+      width: $animationLength;
+      height: $animationLength;
+      border: 3px solid $bg;
+      border-bottom-color: $mainColor;
+      border-top-color: $mainColor;
+      border-left-color: $mainColor;
+      @include borderRad();
+      animation: spin $animationDur linear infinite;
+
+      // spin keyframes
+      @keyframes spin {
+         0% {
+            transform: rotate(0deg);
+         }
+
+         100% {
+            transform: rotate(360deg);
+         }
+      }
+   }
+
+
+   &.spin1 {
+      width: $animationLength;
+      height: $animationLength;
+      border: 3px solid $bg;
+      border-top-color: $mainColor;
+      @include borderRad();
+      animation: spin $animationDur linear infinite;
+   }
+
+
+   &.spin2 {
+      width: $animationLength;
+      height: $animationLength;
+      border: 3px solid $bg;
+      border-bottom-color: $mainColor;
+      border-top-color: $mainColor;
+      @include borderRad();
+      animation: spin $animationDur linear infinite;
+   }
+
+
+   // =============== Ripple
+   &.ripple,
+   &.ripple1 {
+      width: $animationBigLength;
+      height: $animationBigLength;
+
+      &::before,
+      &::after {
+         content: '';
+         @include borderRad();
+         position: absolute;
+         width: 100%;
+         height: 100%;
+         border: 2px solid $mainColor;
+         transform: scale(0);
+         left: 0;
+         top: 0;
+         animation: ripple 1s linear infinite;
+      }
+
+      &::after {
+         animation-delay: .5s;
+      }
+
+      @keyframes ripple {
+         0% {
+            transform: scale(0);
+            opacity: 1;
+         }
+
+         100% {
+            transform: scale(1);
+            opacity: 0;
+         }
+      }
+   }
+
+   &.ripple1 {
+
+      &::before,
+      &::after {
+         border: none;
+         background-color: $mainColor;
+      }
+   }
+
+   &.ripple2 {
+      @include borderRad();
+      width: $animationBigLength;
+      height: $animationBigLength;
+      background-color: $mainColor;
+      transform: scale(0);
+      animation: ripple 1s linear infinite;
+   }
+
+   // =============== Waiting
+   &.waiting {
+      width: 10px;
+      height: 10px;
+      @include borderRad();
+      animation: waiting 1.5s linear infinite;
+      color: $mainColor;
+
+      @keyframes waiting {
+         0% {
+            box-shadow: 10px 0 0 -2px, 28px 0 0 -2px, -10px 0 0 -2px, -28px 0 0 -2px;
+         }
+
+         25% {
+            box-shadow: 10px 0 0 -2px, 28px 0 0 -2px, -10px 0 0 -2px, -28px 0 0 2px;
+         }
+
+         50% {
+            box-shadow: 10px 0 0 -2px, 28px 0 0 -2px, -10px 0 0 2px, -28px 0 0 -2px;
+         }
+
+         75% {
+            box-shadow: 10px 0 0 2px, 28px 0 0 -2px, -10px 0 0 -2px, -28px 0 0 -2px;
+         }
+
+         100% {
+            box-shadow: 10px 0 0 -2px, 28px 0 0 2px, -10px 0 0 -2px, -28px 0 0 -2px;
+         }
+      }
+   }
+
+   &.waiting1 {
+      width: 8px;
+      height: 8px;
+      @include borderRad();
+      background-color: $bg;
+      box-shadow: -$animationHalfLength 0 $bg, $animationHalfLength 0 $bg;
+      animation: waiting1 1.2s linear infinite;
+
+      @keyframes waiting1 {
+         33% {
+            background: $bg;
+            box-shadow: -$animationHalfLength 0 $mainColor, $animationHalfLength 0 $bg;
+         }
+
+         66% {
+            background: $mainColor;
+            box-shadow: -$animationHalfLength 0 $bg, $animationHalfLength 0 $bg;
+         }
+
+         100% {
+            background: $bg;
+            box-shadow: -$animationHalfLength 0 $bg, $animationHalfLength 0 $mainColor;
+         }
+      }
+   }
+
+   &.waiting2 {
+      width: 8px;
+      height: 8px;
+      @include borderRad();
+      animation: waiting2 1.2s linear infinite alternate;
+      color: $mainColor;
+
+      @keyframes waiting2 {
+         0% {
+            box-shadow: -30px -10px, -11px 0, 9px 0, 28px 0; // 10px is the bounce hieght
+         }
+
+         33% {
+            box-shadow: -30px 0px, -11px -10px, 9px 0, 28px 0;
+         }
+
+         66% {
+            box-shadow: -30px 0px, -11px 0, 9px -10px, 28px 0;
+         }
+
+         100% {
+            box-shadow: -30px 0, -11px 0, 9px 0, 28px -10px;
+         }
+      }
+   }
+
+   // =============== Flip
+   &.flip {
+      width: $animationLength;
+      height: $animationLength;
+      background-color: $mainColor;
+      animation: flip 1s linear infinite;
+
+      @keyframes flip {
+         0% {
+            transform: perspective(200px) rotateX(0deg) rotateY(0deg);
+         }
+
+         50% {
+            transform: perspective(200px) rotateX(-180deg) rotateY(0deg);
+         }
+
+         100% {
+            transform: perspective(200px) rotateX(-180deg) rotateY(-180deg);
+         }
+      }
+   }
+
+   &.flip1 {
+      width: $animationLength;
+      height: $animationLength;
+      background-color: $mainColor;
+      animation: flip1 1.2s linear infinite;
+
+      @keyframes flip1 {
+         0% {
+            transform: scale(1) rotate(0deg);
+         }
+
+         100% {
+            transform: scale(0) rotate(360deg);
+         }
+      }
+   }
+
+   &.flip2 {
+      width: $animationLength;
+      height: $animationLength;
+      transform: rotate($animationLengthDeg);
+
+      &::before {
+         content: '';
+         width: $animationHalfLength;
+         height: $animationHalfLength;
+         position: absolute;
+         left: 0;
+         top: -$animationHalfLength;
+         animation: flip2 3s ease infinite;
+      }
+
+      &::after {
+         content: '';
+         position: absolute;
+         left: 0;
+         top: 0;
+         width: $animationHalfLength;
+         height: $animationHalfLength;
+         background: rgba($mainColor, 0.85);
+         box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+         animation: flip2Alt 1.5s ease infinite;
+      }
+
+      @keyframes flip2 {
+         0% {
+            box-shadow: 0 $animationHalfLength rgba(255, 255, 255, 0), $animationHalfLength $animationHalfLength rgba(255, 255, 255, 0), $animationHalfLength $animationLength rgba(255, 255, 255, 0), 0px $animationLength rgba(255, 255, 255, 0);
+         }
+
+         12% {
+            box-shadow: 0 $animationHalfLength rgba($mainColor, .3), $animationHalfLength $animationHalfLength rgba(255, 255, 255, 0), $animationHalfLength $animationLength rgba(255, 255, 255, 0), 0px $animationLength rgba(255, 255, 255, 0);
+         }
+
+         25% {
+            box-shadow: 0 $animationHalfLength rgba($mainColor, .3), $animationHalfLength $animationHalfLength rgba($mainColor, .3), $animationHalfLength $animationLength rgba(255, 255, 255, 0), 0px $animationLength rgba(255, 255, 255, 0);
+         }
+
+         37% {
+            box-shadow: 0 $animationHalfLength rgba($mainColor, .3), $animationHalfLength $animationHalfLength rgba($mainColor, .3), $animationHalfLength $animationLength rgba($mainColor, .3), 0px $animationLength rgba(255, 255, 255, 0);
+         }
+
+         50% {
+            box-shadow: 0 $animationHalfLength rgba($mainColor, .3), $animationHalfLength $animationHalfLength rgba($mainColor, .3), $animationHalfLength $animationLength rgba($mainColor, .3), 0px $animationLength rgba($mainColor, .3);
+         }
+
+         62% {
+            box-shadow: 0 $animationHalfLength rgba(255, 255, 255, 0), $animationHalfLength $animationHalfLength rgba($mainColor, .3), $animationHalfLength $animationLength rgba($mainColor, .3), 0px $animationLength rgba($mainColor, .3);
+         }
+
+         75% {
+            box-shadow: 0 $animationHalfLength rgba(255, 255, 255, 0), $animationHalfLength $animationHalfLength rgba(255, 255, 255, 0), $animationHalfLength $animationLength rgba($mainColor, .3), 0px $animationLength rgba($mainColor, .3);
+         }
+
+         87% {
+            box-shadow: 0 $animationHalfLength rgba(255, 255, 255, 0), $animationHalfLength $animationHalfLength rgba(255, 255, 255, 0), $animationHalfLength $animationLength rgba(255, 255, 255, 0), 0px $animationLength rgba($mainColor, .3);
+         }
+
+         100% {
+            box-shadow: 0 $animationHalfLength rgba(255, 255, 255, 0), $animationHalfLength $animationHalfLength rgba(255, 255, 255, 0), $animationHalfLength $animationLength rgba(255, 255, 255, 0), 0px $animationLength rgba(255, 255, 255, 0);
+         }
+      }
+
+      @keyframes flip2Alt {
+         0% {
+            transform: translate(0, 0) rotateX(0) rotateY(0);
+         }
+
+         25% {
+            transform: translate(100%, 0) rotateX(0) rotateY(180deg);
+         }
+
+         50% {
+            transform: translate(100%, 100%) rotateX(-180deg) rotateY(180deg);
+         }
+
+         75% {
+            transform: translate(0, 100%) rotateX(-180deg) rotateY(360deg);
+         }
+
+         100% {
+            transform: translate(0, 0) rotateX(0) rotateY(360deg);
+         }
+      }
+   }
+
+   // =============== Wave
+   &.freqeuncy {
+      width: 6px;
+      height: $animationLength;
+      border-radius: 3px;
+      background: $mainColor;
+      animation: freqeuncy 0.5s 0.5s linear infinite alternate;
+
+      &::after,
+      &::before {
+         content: '';
+         width: 6px;
+         height: $animationLength;
+         border-radius: 3px;
+         background: $mainColor;
+         position: absolute;
+         bottom: 0;
+         left: $animationHalfLength;
+         animation: freqeuncyAlt 0.5s 0.65s linear infinite alternate;
+      }
+
+      &::before {
+         left: -$animationHalfLength;
+         animation-delay: 0s;
+      }
+
+      @keyframes freqeuncy {
+         0% {
+            height: $animationBigLength;
+            transform: translateY(0);
+         }
+
+         100% {
+            height: 10px;
+            transform: translateY(20px); // height at 0% keyframe / 60%
+         }
+      }
+
+      @keyframes freqeuncyAlt {
+         0% {
+            height: $animationBigLength;
+         }
+
+         100% {
+            height: 5.5px;
+         }
+      }
+
+   }
+
+   &.freqeuncy1 {
+      width: 6px;
+      height: $animationLength;
+      border-radius: 3px;
+      animation: freqeuncy1 1s linear infinite alternate;
+      margin-left: -$animationLength;
+      left: -$animationHalfLength;
+
+      @keyframes freqeuncy1 {
+         0% {
+            box-shadow: 20px 0 rgba($dark, 0.25), 40px 0 $mainColor, 60px 0 $mainColor;
+         }
+
+         50% {
+            box-shadow: 20px 0 $mainColor, 40px 0 rgba($dark, 0.25), 60px 0 $mainColor;
+         }
+
+         100% {
+            box-shadow: 20px 0 $mainColor, 40px 0 $mainColor, 60px 0 rgba($dark, 0.25);
+         }
+      }
+   }
+
+   &.freqeuncy2 {
+      width: 6px;
+      height: $animationLength;
+      border-radius: 3px;
+      background: $mainColor;
+      margin: $animationHalfLength auto;
+      animation: freqeuncy2 0.3s 0.3s linear infinite alternate;
+
+      &::after,
+      &::before {
+         content: '';
+         width: 6px;
+         height: $animationLength;
+         border-radius: 3px;
+         background: $mainColor;
+         position: absolute;
+         top: 50%;
+         transform: translateY(-50%);
+         left: $animationHalfLength;
+         animation: freqeuncy2 0.3s 0.45s linear infinite alternate;
+      }
+
+      &::before {
+         left: -$animationHalfLength;
+         animation-delay: 0s;
+      }
+
+      @keyframes freqeuncy2 {
+         0% {
+            height: $animationLength
+         }
+
+         100% {
+            height: 4px
+         }
+      }
+
+   }
+
+}

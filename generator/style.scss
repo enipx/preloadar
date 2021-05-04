@@ -1,0 +1,172 @@
+$font: "Poppins",
+sans-serif;
+$mainColor: #2b84e4;
+$mobile: 576px;
+
+@mixin media($breakpoint) {
+   @media screen and (max-width: $breakpoint) {
+      @content;
+   }
+}
+
+* {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   font-family: $font;
+}
+
+body {}
+
+.container {
+   max-width: 600px;
+   margin: 15px auto;
+
+   @include media(600px) {
+      margin: 15px;
+   }
+}
+
+.mb-0 {
+   margin-bottom: 0 !important;
+}
+
+ul {
+   list-style: none;
+}
+
+select,
+input,
+textarea,
+button {
+   border: 1px solid lighten(#000, 50%);
+   width: 100%;
+   padding: 6px 10px;
+   outline: 0;
+}
+
+button {
+   cursor: pointer;
+   background-color: $mainColor;
+   color: white;
+   border-color: $mainColor;
+
+   &:hover {
+      
+   }
+}
+
+.input-row {
+   display: grid;
+   grid-template-columns: repeat(2, calc(50% - 5px));
+   grid-gap: 10px;
+
+   &.three {
+      grid-template-columns: repeat(3, calc(33.33% - 7px));
+
+      @include media($mobile) {
+         grid-template-columns: 100%;
+         grid-gap: 0;
+      }
+   }
+
+   @include media($mobile) {
+      grid-template-columns: 100%;
+      grid-gap: 0;
+   }
+}
+
+.input-p {
+   margin: 15px 0;
+
+   @include media($mobile) {
+      margin: 0;
+      margin-bottom: 10px !important;
+   }
+
+   label {
+      display: block;
+      font-size: 0.85em;
+      margin-bottom: 5px;
+      color: lighten(#000, 50%);
+   }
+}
+
+.link {
+   font-size: 0.9em;
+   color: $mainColor;
+   text-decoration: underline;
+   text-align: center;
+   cursor: pointer;
+
+   &:hover {
+      color: rgb(221, 63, 63);
+   }
+}
+
+.mmt-10 {
+   @include media($mobile) {
+      margin-top: 10px !important;
+   }
+}
+
+header {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-bottom: 1px solid rgb(213, 213, 213);
+   padding-bottom: 20px;
+
+   .logo-p {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+
+      .name {
+         margin-left: 15px;
+         font-size: 1.3em;
+         letter-spacing: .12em;
+         //color: $mainColor;
+      }
+   }
+
+   .git {
+      background-color: lighten(black, 20%);
+      padding: 5px 10px;
+      border-radius: 3px;
+      text-decoration: none;
+      color: white;
+      font-size: 0.8em;
+
+      &:hover {
+         background-color: blackx;
+      }
+   }
+}
+
+.content-p {
+   margin-top: 30px;
+}
+
+#hidePreloadar {
+   position: fixed;
+   left: 50%;
+   transform: translateX(-50%);
+   bottom: 50px;
+   z-index: 9999999999999;
+
+   &.hide {
+      pointer-events: none;
+      opacity: 0;
+   }
+}
+
+#output-p {
+   font-size: 1.1em;
+   padding: 20px;
+
+   pre {
+      font-size: 0.75em;
+   }
+}

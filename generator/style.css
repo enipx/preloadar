@@ -1,0 +1,184 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  max-width: 600px;
+  margin: 15px auto;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    margin: 15px;
+  }
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+ul {
+  list-style: none;
+}
+
+select,
+input,
+textarea,
+button {
+  border: 1px solid gray;
+  width: 100%;
+  padding: 6px 10px;
+  outline: 0;
+}
+
+button {
+  cursor: pointer;
+  background-color: #2b84e4;
+  color: white;
+  border-color: #2b84e4;
+}
+
+.input-row {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (calc(50% - 5px))[2];
+      grid-template-columns: repeat(2, calc(50% - 5px));
+  grid-gap: 10px;
+}
+
+.input-row.three {
+  -ms-grid-columns: (calc(33.33% - 7px))[3];
+      grid-template-columns: repeat(3, calc(33.33% - 7px));
+}
+
+@media screen and (max-width: 576px) {
+  .input-row.three {
+    -ms-grid-columns: 100%;
+        grid-template-columns: 100%;
+    grid-gap: 0;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .input-row {
+    -ms-grid-columns: 100%;
+        grid-template-columns: 100%;
+    grid-gap: 0;
+  }
+}
+
+.input-p {
+  margin: 15px 0;
+}
+
+@media screen and (max-width: 576px) {
+  .input-p {
+    margin: 0;
+    margin-bottom: 10px !important;
+  }
+}
+
+.input-p label {
+  display: block;
+  font-size: 0.85em;
+  margin-bottom: 5px;
+  color: gray;
+}
+
+.link {
+  font-size: 0.9em;
+  color: #2b84e4;
+  text-decoration: underline;
+  text-align: center;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: #dd3f3f;
+}
+
+@media screen and (max-width: 576px) {
+  .mmt-10 {
+    margin-top: 10px !important;
+  }
+}
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 1px solid #d5d5d5;
+  padding-bottom: 20px;
+}
+
+header .logo-p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+header .logo-p .name {
+  margin-left: 15px;
+  font-size: 1.3em;
+  letter-spacing: .12em;
+}
+
+header .git {
+  background-color: #333333;
+  padding: 5px 10px;
+  border-radius: 3px;
+  text-decoration: none;
+  color: white;
+  font-size: 0.8em;
+}
+
+header .git:hover {
+  background-color: blackx;
+}
+
+.content-p {
+  margin-top: 30px;
+}
+
+#hidePreloadar {
+  position: fixed;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  bottom: 50px;
+  z-index: 9999999999999;
+}
+
+#hidePreloadar.hide {
+  pointer-events: none;
+  opacity: 0;
+}
+
+#output-p {
+  font-size: 1.1em;
+  padding: 20px;
+}
+
+#output-p pre {
+  font-size: 0.75em;
+}
+/*# sourceMappingURL=style.css.map */

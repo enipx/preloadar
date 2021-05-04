@@ -1,0 +1,42 @@
+{
+  "name": "preloadar",
+  "version": "1.0.0",
+  "description": "lightweight (5k) preloader for your web project in simple steps",
+  "main": "./dist/preloadar.js",
+  "scripts": {
+    "sass": "sass --watch src:dist",
+    "start": "webpack --mode=development",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "minify": "minify dist/preloadar.css > dist/preloadar.min.css",
+    "build": "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enipx/preloadar.git"
+  },
+  "keywords": [
+    "preloader",
+    "preloadar",
+    "preload",
+    "preloading",
+    "web",
+    "css",
+    "animation",
+    "css loader",
+    "performance"
+  ],
+  "author": "Hashir <connect@enipx.com> (https://www.enipx.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enipx/preloadar/issues"
+  },
+  "homepage": "https://github.com/enipx/preloadar#readme",
+  "files": [
+    "dist/"
+  ],
+  "devDependencies": {
+    "ts-loader": "^9.1.1",
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.6.0"
+  }
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Preloadar</title>
+   <link rel="stylesheet" href="../dist/preloadar.min.css">
+   <link rel="stylesheet" href="./prism.css">
+   <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+   <div id="preloadar"></div>   
+
+   <div id="preloadarContainer">
+      <div class="container">
+
+         <header>
+            <div class="logo-p">
+               <div class="loadar spin"></div>
+               <p class="name">Preloadar</p>
+            </div>
+
+            <ul>
+               <li><a href="https://github.com/enipx/preloadar" class="git">Github</a></li>
+            </ul>
+         </header>
+         
+
+         <div class="content-p">
+
+            <div class="input-p mb-0">
+               <label for="typeInput">Select Type</label>
+               <select name="animation" id="typeInput">
+                  <option value="auto">Auto</option>
+                  <option value="manual">Manual</option>
+                  <option value="show">Show</option>
+                  <option value="hide">Hide</option>
+               </select>
+            </div>
+
+            <div class="input-row">
+               <div class="input-p mb-0">
+                  <label for="animationInput">Select Animation</label>
+                  <select name="animation" id="animationInput">
+                     <option value="spin">Spin</option>
+                     <option value="ripple">Ripple</option>
+                     <option value="waiting">Waiting</option>
+                     <option value="flip">Flip</option>
+                     <option value="frequency">Frequency</option>
+                     <option value="topBar">TopBar</option>
+                  </select>
+               </div>
+   
+               <div class="input-p mb-0">
+                  <label for="animationVariationInput">Select Animation Variation</label>
+                  <select name="animation" id="animationVariationInput">
+                     <option value="">Default</option>
+                     <option value="1">1</option>
+                     <option value="2">2</option>
+                  </select>
+               </div>
+            </div>
+
+            <div class="input-p mb-0">
+               <label for="delayInput">Delay (Milliseconds)</label>
+               <input type="number" id="delayInput" value="500">
+            </div>
+
+            <div class="input-row three">
+               <div class="input-p">
+                  <label for="colorInput">Color</label>
+                  <input type="text" id="colorInput" value="#2b84e4">
+               </div>
+
+               <div class="input-p">
+                  <label for="secondaryColorInput">Secondary Color</label>
+                  <input type="text" id="secondaryColorInput" value="#e8e7e7">
+               </div>
+   
+               <div class="input-p">
+                  <label for="bgColorInput">BgColor</label>
+                  <input type="text" id="bgColorInput" value="#ffffff">
+               </div>
+            </div>
+
+            <div class="button-p">
+               <div class="input-p mmt-10">
+                  <button id="showPreloadar">Preview Preloadar</button>
+               </div>
+               <p id="generatePreloadar" class="link">Generate Code</p>
+            </div>
+            
+            <div id="output-p">
+               <pre>
+                  <code class="language-js code-output">
+                  </code>
+               </pre>
+            </div>
+
+         </div>
+
+      </div>
+
+      <p id="hidePreloadar" class="link hide">Hide Preloadar</p>
+   </div>
+
+   
+   
+   
+
+   <script src="../dist/preloadar.js"></script>
+   <script src="./prism.js"></script>
+   <script src="./main.js"></script>
+</body>
+</html>
